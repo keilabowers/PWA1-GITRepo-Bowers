@@ -2,8 +2,8 @@
  Keila Bowers
  Student #: 0004632583
  WDD244-0 Section 01
- December 1, 2014
- Week 1 - Analyze Buggy Search V1
+ December 12, 2014
+ Week 3 - Debug Search V3
  */
 
 // Create privatized scope using a self-executing function
@@ -16,7 +16,7 @@
 	;
 	
 	// Validates search query
-	var validqte = function(query){ //sets the variable "validqte" as a function + Function calls the query variable //removed extra =
+	var validate = function(query){ //sets the variable "validate" as a function + Function calls the query variable //removed extra =
 		
 		// Trim whitespace from start and end of search query
 		while(query.charAt(0) === " "){ //comparing so added ===
@@ -119,7 +119,7 @@
 	// THE LINE DIRECTLY BELOW IS CORRECT
 	document.forms[0].onsubmit = function() {
         var query = searchInput.value;
-        validqte(query);
+        validate(query);
 
         // return false is needed for most events - this will be reviewed in upcoming course material
         // THE LINE DIRECTLY BELOW IS CORRECT
