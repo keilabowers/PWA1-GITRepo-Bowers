@@ -2,8 +2,8 @@
  Keila Bowers
  Student #: 0004632583
  WDD244-0 Section 01
- December 12, 2014
- Week 3 - Debug Search V3
+ December 1, 2014
+ Week 1 - Analyze Buggy Search V1
  */
 
 // Create privatized scope using a self-executing function
@@ -16,16 +16,16 @@
 	;
 	
 	// Validates search query
-	var validqte == function(query){ //sets the variable "validqte" as a function + Function calls the query variable
+	var validqte = function(query){ //sets the variable "validqte" as a function + Function calls the query variable //removed extra =
 		
 		// Trim whitespace from start and end of search query
-		while(query.charAt(0) = " "){
+		while(query.charAt(0) === " "){ //comparing so added ===
 			query = query.substring(1, query.length); //If the first character is a space then it removes it
 		};
-		while(query.charAt(query.length-1) === ""){ //If the last character is a space then it removes it
-			query = query.substring(0, query.length-1);
-		;
-		
+		while(query.charAt(query.length-1) === "") { //If the last character is a space then it removes it
+            query = query.substring(0, query.length - 1);
+        };
+
 		// Check search length, must have 3 characters
 		if(query.length < 3){ //Sees if the length of the user input is less than 3 characters
 			alert("Your search query is too small, try again."); //Added last " to end string //Pop up alert telling the user the search input is too small
@@ -39,40 +39,41 @@
 	};
 	
 	// Finds search matches
-	var search = function(query) //sets the variable "search" as a function + Function calls the query variable again
+	var search = function(query){ //sets the variable "search" as a function + Function calls the query variable again //missing { for function
 		
 		// split the user's search query string into an array
-		var queryArray = query.join(" "); //puts a space between the array values
+		var queryArray = query.split(" "); //puts a space between the array values //changed function from join to split
 		
 		// array to store matched results from database.js
 		var results = []; //declares results variable as the container to store arrays results from database
 
 		// loop through each index of db array
-		for(var i=0, j=db.length; i<j; i++){
-		
-			// each db[i] is a single video item, each title ends with a pipe "|"
-			// save a lowercase variable of the video title
-			var dbTitleEnd = db[i].indexOf('|'); //Sets variable as the Title from the database
-			var dbitem = db[i].tolowercase().substring(0, dbTitleEnd); //converts all characters to lowercase
-			
-			// loop through the user's search query words
-			// save a lowercase variable of the search keyword
-			for(var ii=0, jj=queryArray.length; ii<jj; ii++){ //loops for each character of the user input search
-				var qitem = queryArray[ii].tolowercase(); //converts all characters to lowercase
-				
-				// is the keyword anywhere in the video title?
-				// If a match is found, push full db[i] into results array
-				var compare = dbitem.indexOf(qitem); //compares the lowercase versions of the database arrays and user input search
-				if(compare !== -1){ //shows how many characters matched
-					results.push(db[i]); //sends all results out
-				};
-			;
-		;
-		
-		results.sort(); //sorts results
+		for(var i=0, j=db.length; i<j; i++) {
+
+            // each db[i] is a single video item, each title ends with a pipe "|"
+            // save a lowercase variable of the video title
+            var dbTitleEnd = db[i].indexOf('|'); //Sets variable as the Title from the database
+            var dbitem = db[i].toLowerCase().substring(0, dbTitleEnd); //converts all characters to lowercase //tolowercase changed to camelCase
+
+            // loop through the user's search query words
+            // save a lowercase variable of the search keyword
+            for (var ii = 0, jj = queryArray.length; ii < jj; ii++) { //loops for each character of the user input search
+                var qitem = queryArray[ii].toLowerCase(); //converts all characters to lowercase //tolowercase changed to camelCase
+
+                // is the keyword anywhere in the video title?
+                // If a match is found, push full db[i] into results array
+                var compare = dbitem.indexOf(qitem); //compares the lowercase versions of the database arrays and user input search
+                if (compare !== -1) { //shows how many characters matched
+                    results.push(db[i]); //sends all results out
+                }; //terminated function with missing }
+            }; //terminated function with missing }
+        }; //terminated function with missing }
+
+
+        results.sort(); //sorts results
 		
 		// Check that matches were found, and run output functions
-		if(results.length = 0){  //if non matched go to function noMatch()
+		if(results.length === 0){  //if non matched go to function noMatch() //comparing so added ===
 			noMatch();
 		}else{
 			showMatches(results); //if they did then go to function showMatches
@@ -103,7 +104,7 @@
 			// title of video ends with pipe
 			// pull the title's string using index numbers
 			titleEnd = results[i].indexOf('|'); //if the results is a video
-			title = results[i].subString(0, titleEnd); //grab index number
+			title = results[i].substring(0, titleEnd); //grab index number
 			
 			// pull the video url after the title
 			url = results[i].substring(results[i].indexOf('|')+1, results[i].length); //grabs url from DB
@@ -116,13 +117,13 @@
 	
 	// The onsubmit event will be reviewed in upcoming Course Material.
 	// THE LINE DIRECTLY BELOW IS CORRECT
-	document.forms[0].onsubmit = function(){
-		var query = searchInput.value;
-		validqte(query);
+	document.forms[0].onsubmit = function() {
+        var query = searchInput.value;
+        validqte(query);
 
         // return false is needed for most events - this will be reviewed in upcoming course material
         // THE LINE DIRECTLY BELOW IS CORRECT
-		return false;
-	;
+        return false;
+    };//terminated function with missing }
 
 })();
